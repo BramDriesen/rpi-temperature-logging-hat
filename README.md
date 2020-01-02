@@ -11,21 +11,7 @@ This script is built to work with the SHT31-D Temperature & Humidity sensor from
 
 ## Configuration
 
-###### Make sure the I2C interface is enabled in your Raspberry Pi configuration.
-
-Verify this by executing the following command:
-
-    sudo i2cdetect -y 1
-
-You should not see an error message like:
-
-    Error: Could not open file '/dev/i2c-1' or '/dev/i2c/1': No such file or directory.
-
-Instead you should see a message like:
-
-    
-    
-
+Make sure the I2C & SPI interface is enabled in your Raspberry Pi configuration.
 
 ## Installing dependencies
 
