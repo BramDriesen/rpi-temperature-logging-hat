@@ -3,6 +3,7 @@ from PIL import ImageDraw
 from PIL import ImageFont
 from multiprocessing import Process
 import time
+import subprocess
 import board
 import busio
 import adafruit_sht31d
@@ -13,18 +14,18 @@ import ST7735
 BUTTON = 17
 BACKLIGHT = 19
 
-# GPIO SETUP.
-GPIO.setup(BUTTON, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
 
 def button():
     try:
+        GPIO.setup(BUTTON, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         while True:
-            button_state = GPIO.input(BUTTON)
-            if button_state == False:
-                print('Button Pressed...')
+            GPIO.wait_for_edge(BUTTON, GPIO.FALLING)
+            pin = GPIO.wait_for_edge(BUTTON, GPIO.RISING, timeout=3000)
+            if pin is None:
+                subprocess.call('sudo shutdown -h now', shell=True)
+            else:
                 GPIO.output(BACKLIGHT, not GPIO.input(BACKLIGHT))
-                time.sleep(0.2)
+            time.sleep(0.2)
     finally:
         GPIO.cleanup()
 
