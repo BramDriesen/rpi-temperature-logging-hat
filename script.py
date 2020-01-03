@@ -14,6 +14,8 @@ import ST7735
 BUTTON = 17
 BACKLIGHT = 19
 
+# GLOBAL VAR.
+disp = None
 
 def button():
     try:
@@ -30,7 +32,21 @@ def button():
         GPIO.cleanup()
 
 
+def screen_setup():
+    disp = ST7735.ST7735(
+        port=0,
+        cs=ST7735.BG_SPI_CS_FRONT,
+        dc=9,
+        backlight=BACKLIGHT,
+        rotation=90,
+        spi_speed_hz=10000000
+    )
+
+
 if __name__ == '__main__':
+    screen_setup()
+    disp.begin()
+
     button_process = Process(target=button())
     button_process.start()
 
