@@ -63,6 +63,7 @@ try:
         if button_state == False:
             print('Button Pressed...')
             GPIO.output(BACKLIGHT, not GPIO.input(BACKLIGHT))
+            time.sleep(0.2)
 
         #print("\nTemperature: %0.1f C" % sensor.temperature)
         #print("Humidity: %0.1f %%" % sensor.relative_humidity)
