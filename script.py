@@ -69,4 +69,6 @@ try:
         #print("Humidity: %0.1f %%" % sensor.relative_humidity)
         #time.sleep(2)
 except:
+    # Turn off the backlight.
+    GPIO.output(BACKLIGHT, 0)
     GPIO.cleanup()
