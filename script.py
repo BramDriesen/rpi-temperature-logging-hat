@@ -15,7 +15,7 @@ BUTTON = 17
 BACKLIGHT = 19
 
 # GLOBAL VAR.
-disp = None
+global disp
 
 def button():
     try:
