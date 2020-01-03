@@ -60,7 +60,6 @@ def temperature_humidity_logging():
 if __name__ == '__main__':
     # Screen setup.
     screen_setup()
-    global disp
 
     # Start listening for button actions.
     button_process = Process(target=button())
