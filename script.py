@@ -2,6 +2,7 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 from multiprocessing import Process
+from gpiozero import Button
 import time
 import subprocess
 import board
@@ -11,7 +12,7 @@ import RPi.GPIO as GPIO
 import ST7735
 
 # GPIO PINS.
-BUTTON = 17
+GPIO_BUTTON = 17
 BACKLIGHT = 19
 
 # GLOBAL VAR.
@@ -19,20 +20,27 @@ disp = None
 
 def button():
     try:
-        GPIO.setup(BUTTON, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        button = Button(GPIO_BUTTON, hold_time=3)
         while True:
-            GPIO.wait_for_edge(BUTTON, GPIO.FALLING)
-            pin = GPIO.wait_for_edge(BUTTON, GPIO.RISING, timeout=3000)
-            if pin is None:
-                subprocess.call('sudo shutdown -h now', shell=True)
-            else:
-                GPIO.output(BACKLIGHT, not GPIO.input(BACKLIGHT))
-            time.sleep(0.2)
+            if button.is_pressed:
+                print("TEST")
+            elif button.is_held:
+                print("TEST2")
+
+        # GPIO.setup(BUTTON, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        # while True:
+        #     GPIO.wait_for_edge(BUTTON, GPIO.FALLING)
+        #     pin = GPIO.wait_for_edge(BUTTON, GPIO.RISING, timeout=3000)
+        #     if pin is None:
+        #         subprocess.call('sudo shutdown -h now', shell=True)
+        #     else:
+        #         GPIO.output(BACKLIGHT, not GPIO.input(BACKLIGHT))
+        #     time.sleep(0.2)
     finally:
         GPIO.cleanup()
 
 
-def screen_setup():
+def setup():
     global disp
     disp = ST7735.ST7735(
         port=0,
@@ -58,8 +66,8 @@ def temperature_humidity_logging():
 
 
 if __name__ == '__main__':
-    # Screen setup.
-    screen_setup()
+    # Setup.
+    setup()
 
     # Start listening for button actions.
     button_process = Process(target=button())

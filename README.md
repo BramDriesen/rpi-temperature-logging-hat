@@ -17,4 +17,5 @@ Make sure the I2C & SPI interface is enabled in your Raspberry Pi configuration.
 
     sudo pip3 install adafruit-circuitpython-sht31d
     curl https://get.pimoroni.com/st7735 | bash
+    sudo pip3 install gpiozero
 
