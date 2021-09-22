@@ -20,7 +20,7 @@ sudo pip3 install adafruit-circuitpython-sht31d
 # LCD SPI Library
 curl https://get.pimoroni.com/st7735 | bash
 
-# Matplotlib & Numpy 
+# Matplotlib and Numpy 
 sudo pip3 install matplotlib
 sudo pip3 install numpy --upgrade
 ```

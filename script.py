@@ -1,17 +1,20 @@
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
-
 from matplotlib import pyplot as plt
-import matplotlib as mpl
-
-import time
+from gpiozero import Button
 from datetime import datetime
+
+import matplotlib as mpl
 import board
 import numpy as np
-
+import RPi.GPIO as GPIO
 import adafruit_sht31d
 import ST7735
+
+x = []
+y = []
+display_is_on = True
 
 # Create sensor object, communicating over the board's default I2C bus
 i2c = board.I2C()
@@ -26,15 +29,29 @@ disp = ST7735.ST7735(
     rotation=90,
     spi_speed_hz=4000000
 )
- 
+
 # Initialize display.
 disp.begin()
 
 WIDTH = disp.width
 HEIGHT = disp.height
 
-x = []
-y = []
+def reset():
+    x = []
+    y = []
+
+def toggle_screen(self):
+    if self.display_is_on:
+        self.disp.set_backlight(GPIO.HIGH)
+        self.display_is_on = False
+    else:
+        self.disp.set_backlight(GPIO.LOW)
+        self.display_is_on = True
+
+# Button.
+button = Button(17, hold_time=5)
+button.when_held = reset
+button.when_pressed = toggle_screen
 
 while True:
     now = datetime.now()
