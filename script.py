@@ -56,31 +56,36 @@ def draw_graph(x, y, disp):
     # Draw the image on the display.
     disp.display(image)
 
-def reset_graph():
+# Button.
+Button.was_held = False
+
+def reset_graph(button):
+    button.was_held = True
     print("Reset button triggered")
     global x
     global y
     global disp
-    x = []
-    y = []
+    x.clear()
+    y.clear()
     draw_graph(x, y, disp)
 
-def toggle_screen():
-    print("Toggle screen button triggered")
-    global display_is_on
-    global disp
-    global GPIO
-    if display_is_on:
-        disp.set_backlight(GPIO.HIGH)
-        display_is_on = False
-    else:
-        disp.set_backlight(GPIO.LOW)
-        display_is_on = True
+def toggle_screen(button):
+    if not button.was_held:
+        print("Toggle screen button triggered")
+        global display_is_on
+        global disp
+        global GPIO
+        if display_is_on:
+            disp.set_backlight(GPIO.HIGH)
+            display_is_on = False
+        else:
+            disp.set_backlight(GPIO.LOW)
+            display_is_on = True
+    button.was_held = False
 
-# Button.
 button = Button(17, hold_time=5)
 button.when_held = reset_graph
-button.when_pressed = toggle_screen
+button.when_released = toggle_screen
 
 while True:
     now = datetime.now()
