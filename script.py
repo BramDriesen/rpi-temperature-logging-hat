@@ -62,7 +62,7 @@ def reset_graph(x, y, disp):
     y = []
     draw_graph(x, y, disp)
 
-def toggle_screen(display_is_on, disp):
+def toggle_screen(GPIO, display_is_on, disp):
     print("Toggle screen button triggered")
     if display_is_on:
         disp.set_backlight(GPIO.HIGH)
@@ -74,7 +74,7 @@ def toggle_screen(display_is_on, disp):
 # Button.
 button = Button(17, hold_time=5)
 button.when_held = lambda : reset_graph(x , y, disp)
-button.when_pressed = lambda : toggle_screen(display_is_on, disp)
+button.when_pressed = lambda : toggle_screen(GPIO, display_is_on, disp)
 
 while True:
     now = datetime.now()
