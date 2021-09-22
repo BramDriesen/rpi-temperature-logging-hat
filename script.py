@@ -105,11 +105,11 @@ button.when_released = toggle_screen
 while True:
     now = datetime.now()
 
-    time = now.strftime("%H:%M:%S")
+    current_time = now.strftime("%H:%M:%S")
     temperature = sensor.temperature
     humidity = sensor.relative_humidity
 
-    x.append(time)
+    x.append(current_time)
     y.append(sensor.temperature)
 
     print("\nTemperature: %0.1f C" % temperature)
@@ -119,6 +119,6 @@ while True:
 
     with open(r'data.csv', 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow([time, temperature, humidity])
+        writer.writerow([current_time, temperature, humidity])
 
     time.sleep(10)
