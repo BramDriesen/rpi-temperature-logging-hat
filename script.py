@@ -72,8 +72,14 @@ def reset_graph(button):
     global x
     global y
     global disp
+
+    # Flash the screen so it's clear we cleared the graph.
+    disp.set_backlight(GPIO.LOW)
+    disp.set_backlight(GPIO.HIGH)
+
     x.clear()
     y.clear()
+    plt.clf()
     draw_graph(x, y, disp)
 
 def toggle_screen(button):
@@ -96,7 +102,6 @@ button.when_released = toggle_screen
 
 while True:
     now = datetime.now()
-    # Todo: remove seconds
     x.append(now.strftime("%H:%M:%S"))
     y.append(sensor.temperature)
 

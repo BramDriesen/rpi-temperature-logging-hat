@@ -12,6 +12,7 @@ sudo apt-get upgrade
 sudo apt-get install python3-pip libopenjp2-7 libatlas-base-dev
 sudo pip3 install --upgrade setuptools
 ```
+
 From [Adafruit CircuitPython](https://learn.adafruit.com/circuitpython-on-raspberrypi-linux/installing-circuitpython-on-raspberry-pi)
 
 ## Installing required dependencies
@@ -38,3 +39,9 @@ sudo raspi-config
 - Enable SPI
 
 Reboot before usage.
+
+## Rsync file to local
+
+```bash
+rsync -avz pi@192.168.178.57:rpi-temperature-logging-hat/chart.png ~/Downloads/chart.png
+```
