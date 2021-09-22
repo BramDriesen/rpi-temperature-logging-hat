@@ -33,7 +33,6 @@ disp = ST7735.ST7735(
 
 # Initialize display.
 disp.begin()
-disp.set_backlight(GPIO.LOW)
 
 WIDTH = disp.width
 HEIGHT = disp.height
@@ -45,7 +44,12 @@ def draw_graph(x, y, disp):
     
     mpl.style.use('dark_background')
     mpl.rc('font', **font)
-    plt.tick_params(axis='both', left='off', top='off', right='off', bottom='off', labelleft='off', labeltop='off', labelright='off', labelbottom='off')
+    plt.tick_params(
+        axis='x',
+        which='both',
+        bottom=False,
+        top=False,
+        labelbottom=False)    
     plt.plot(x, y, color = 'red')
     plt.savefig('chart.png', bbox_inches='tight', pad_inches = 0.0)
 
@@ -78,10 +82,10 @@ def toggle_screen(button):
         global disp
         global GPIO
         if display_is_on:
-            disp.set_backlight(GPIO.HIGH)
+            disp.set_backlight(GPIO.LOW)
             display_is_on = False
         else:
-            disp.set_backlight(GPIO.LOW)
+            disp.set_backlight(GPIO.HIGH)
             display_is_on = True
     button.was_held = False
 
