@@ -37,7 +37,7 @@ disp.begin()
 WIDTH = disp.width
 HEIGHT = disp.height
 
-def reset():
+def reset(x, y):
     x = []
     y = []
 
