@@ -24,3 +24,14 @@ LCD SPI Library
 ```bash
 curl https://get.pimoroni.com/st7735 | bash
 ```
+
+## Raspi config
+
+```bash
+sudo raspi-config
+```
+
+- Interface options
+- Enable SPI
+
+Reboot before usage.
