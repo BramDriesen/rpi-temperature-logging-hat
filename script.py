@@ -45,7 +45,6 @@ def draw_graph(x, y, disp):
     
     mpl.style.use('dark_background')
     mpl.rc('font', **font)
-    plt.axis('off')
     plt.tick_params(axis='both', left='off', top='off', right='off', bottom='off', labelleft='off', labeltop='off', labelright='off', labelbottom='off')
     plt.plot(x, y, color = 'red')
     plt.savefig('chart.png', bbox_inches='tight', pad_inches = 0.0)
