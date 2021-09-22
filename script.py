@@ -38,13 +38,19 @@ y = []
 
 while True:
     now = datetime.now()
-    x.append(now.strftime("%H:%M"))
+    # Todo: remove seconds
+    x.append(now.strftime("%H:%M:%S"))
     y.append(sensor.temperature)
 
-    # print("\nTemperature: %0.1f C" % sensor.temperature)
-    # print("Humidity: %0.1f %%" % sensor.relative_humidity)
+    font = {'family' : 'normal',
+            'weight' : 'bold',
+            'size'   : 22}
+
+    print("\nTemperature: %0.1f C" % sensor.temperature)
+    print("Humidity: %0.1f %%" % sensor.relative_humidity)
 
     mpl.style.use('dark_background')
+    mpl.rc('font', **font)
     plt.plot(x, y)
     plt.savefig('chart.png', bbox_inches='tight')
 
