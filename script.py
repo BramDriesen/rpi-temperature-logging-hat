@@ -55,4 +55,4 @@ disp.display(image)
 while True:
     print("\nTemperature: %0.1f C" % sensor.temperature)
     print("Humidity: %0.1f %%" % sensor.relative_humidity)
-    time.sleep(2)
+    time.sleep(10)
