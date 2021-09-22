@@ -37,11 +37,11 @@ disp.begin()
 WIDTH = disp.width
 HEIGHT = disp.height
 
-def reset(x, y):
+def reset(button, x, y):
     x = []
     y = []
 
-def toggle_screen(display_is_on, disp):
+def toggle_screen(button, display_is_on, disp):
     if display_is_on:
         disp.set_backlight(GPIO.HIGH)
         display_is_on = False
@@ -51,8 +51,8 @@ def toggle_screen(display_is_on, disp):
 
 # Button.
 button = Button(17, hold_time=5)
-button.when_held = reset(x, y)
-button.when_pressed = toggle_screen(display_is_on, disp)
+button.when_held = reset(button, x = x , y = y)
+button.when_pressed = toggle_screen(button, display_is_on = display_is_on, disp = disp)
 
 while True:
     now = datetime.now()
