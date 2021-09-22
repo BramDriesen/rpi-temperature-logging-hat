@@ -1,8 +1,18 @@
 # rpi-temperature-logging-hat
 
-Raspberry Pi Temperature Logging HAT.
+Raspberry Pi Temperature Logging HAT to measure and display the temperature.
 
 Tiny project to plot the temperature of an Adafruit SHT31-D humidity/temperature sensor on a graph which on it's turn is displayed on an SPI display by Pimoroni (ST7735)
+
+**Features:**
+
+- Read sensor values from a Adafruit SHT31-D humidity/temperature sensor
+- Plot a chart with matplotlib and save it as PNG file
+- Display chart on a Pimoroni ST7735 SPI display
+- Write sensor data to a CSV for further processing if needed
+- Button features:
+  - Short press: Toggle on/off display
+  - Long press (5 sec): Reset chart and wipe CSV
 
 ## Updating your RPI
 
