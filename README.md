@@ -55,3 +55,23 @@ Reboot before usage.
 ```bash
 rsync -avz pi@192.168.178.57:rpi-temperature-logging-hat/chart.png ~/Downloads/chart.png
 ```
+
+## Autostart
+
+Edit your `rc.local` (or use any other method as [described here][3]) file to make the script run at boot. Edit it using the command:
+
+```bash
+sudo nano /etc/rc.local
+```
+
+Using your cursor keys scroll to the bottom and add the following line right before the `exit 0` line:
+
+```bash
+sudo python3 /home/pi/rpi-temperature-logging-hat/script.py & > /home/pi/rpi-temperature-logging-hat.log
+```
+
+Now reboot your Pi and the script should automatically start.
+
+```bash
+sudo reboot
+```
