@@ -1,6 +1,26 @@
 # rpi-temperature-logging-hat
 Raspberry Pi Temperature Logging HAT
 
-## Installing dependencies
+## Updating your RPI
 
-  sudo pip3 install adafruit-circuitpython-sht31d
+```bash
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install python3-pip
+sudo pip3 install --upgrade setuptools
+```
+From [Adafruit CircuitPython](https://learn.adafruit.com/circuitpython-on-raspberrypi-linux/installing-circuitpython-on-raspberry-pi)
+
+## Installing required dependencies
+
+SHT31-D Library
+
+```bash
+sudo pip3 install adafruit-circuitpython-sht31d
+```
+
+LCD SPI Library
+
+```bash
+curl https://get.pimoroni.com/st7735 | bash
+```
