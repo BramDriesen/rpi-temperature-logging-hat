@@ -10,6 +10,7 @@ import matplotlib as mpl
 import board
 import numpy as np
 import RPi.GPIO as GPIO
+import csv
 import adafruit_sht31d
 import ST7735
 
@@ -73,10 +74,6 @@ def reset_graph(button):
     global y
     global disp
 
-    # Flash the screen so it's clear we cleared the graph.
-    disp.set_backlight(GPIO.LOW)
-    disp.set_backlight(GPIO.HIGH)
-
     x.clear()
     y.clear()
     plt.clf()
@@ -102,12 +99,20 @@ button.when_released = toggle_screen
 
 while True:
     now = datetime.now()
-    x.append(now.strftime("%H:%M:%S"))
+
+    time = now.strftime("%H:%M:%S")
+    temperature = sensor.temperature
+    humidity = sensor.relative_humidity
+
+    x.append(time)
     y.append(sensor.temperature)
 
-    print("\nTemperature: %0.1f C" % sensor.temperature)
-    print("Humidity: %0.1f %%" % sensor.relative_humidity)
+    print("\nTemperature: %0.1f C" % temperature)
+    print("Humidity: %0.1f %%" % humidity)
 
     draw_graph(x, y, disp)
+
+    with open(r'data.csv', 'a', newline='') as csvfile:
+        csvfile.write([time, temperature, humidity])
 
     time.sleep(10)
