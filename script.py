@@ -5,6 +5,7 @@ from matplotlib import pyplot as plt
 from gpiozero import Button
 from datetime import datetime
 
+import time
 import matplotlib as mpl
 import board
 import numpy as np
@@ -59,9 +60,9 @@ while True:
     x.append(now.strftime("%H:%M:%S"))
     y.append(sensor.temperature)
 
-    font = {'family' : 'normal',
+    font = {'family' : 'DejaVu Sans',
             'weight' : 'bold',
-            'size'   : 22}
+            'size'   : 24}
 
     print("\nTemperature: %0.1f C" % sensor.temperature)
     print("Humidity: %0.1f %%" % sensor.relative_humidity)
