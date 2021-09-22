@@ -37,40 +37,11 @@ disp.begin()
 WIDTH = disp.width
 HEIGHT = disp.height
 
-def reset_graph():
-    global x
-    global y
-    x = []
-    y = []
-
-def toggle_screen():
-    global display_is_on
-    global disp
-    if display_is_on:
-        disp.set_backlight(GPIO.HIGH)
-        display_is_on = False
-    else:
-        disp.set_backlight(GPIO.LOW)
-        display_is_on = True
-
-# Button.
-button = Button(17, hold_time=5)
-button.when_held = reset_graph
-button.when_pressed = toggle_screen
-
-while True:
-    now = datetime.now()
-    # Todo: remove seconds
-    x.append(now.strftime("%H:%M:%S"))
-    y.append(sensor.temperature)
-
+def draw_graph(x, y, disp):
     font = {'family' : 'DejaVu Sans',
             'weight' : 'bold',
             'size'   : 24}
-
-    print("\nTemperature: %0.1f C" % sensor.temperature)
-    print("Humidity: %0.1f %%" % sensor.relative_humidity)
-
+    
     mpl.style.use('dark_background')
     mpl.rc('font', **font)
     plt.plot(x, y)
@@ -84,5 +55,36 @@ while True:
 
     # Draw the image on the display.
     disp.display(image)
+
+def reset_graph(x, y, disp):
+    print("Reset button triggered")
+    x = []
+    y = []
+    draw_graph(x, y, disp)
+
+def toggle_screen(display_is_on, disp):
+    print("Toggle screen button triggered")
+    if display_is_on:
+        disp.set_backlight(GPIO.HIGH)
+        display_is_on = False
+    else:
+        disp.set_backlight(GPIO.LOW)
+        display_is_on = True
+
+# Button.
+button = Button(17, hold_time=5)
+button.when_held = lambda : reset_graph(x , y, disp)
+button.when_pressed = lambda : toggle_screen(display_is_on, disp)
+
+while True:
+    now = datetime.now()
+    # Todo: remove seconds
+    x.append(now.strftime("%H:%M:%S"))
+    y.append(sensor.temperature)
+
+    print("\nTemperature: %0.1f C" % sensor.temperature)
+    print("Humidity: %0.1f %%" % sensor.relative_humidity)
+
+    draw_graph(x, y, disp)
 
     time.sleep(10)
