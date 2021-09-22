@@ -41,13 +41,13 @@ def reset():
     x = []
     y = []
 
-def toggle_screen(self):
-    if self.display_is_on:
-        self.disp.set_backlight(GPIO.HIGH)
-        self.display_is_on = False
+def toggle_screen():
+    if display_is_on:
+        disp.set_backlight(GPIO.HIGH)
+        display_is_on = False
     else:
-        self.disp.set_backlight(GPIO.LOW)
-        self.display_is_on = True
+        disp.set_backlight(GPIO.LOW)
+        display_is_on = True
 
 # Button.
 button = Button(17, hold_time=5)
