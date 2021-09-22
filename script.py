@@ -36,10 +36,10 @@ x = np.linspace(-1, 1, 50)
 print(x)
 y = 2*x + 1
 
-#plt.plot(x, y)
+plt.plot(x, y)
 #plt.show()
 
-plt.savefig('chart.png')
+plt.savefig('chart.png', bbox_inches='tight')
 
 # Load the image
 image = Image.open('chart.png')
