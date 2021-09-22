@@ -3,6 +3,7 @@ from PIL import ImageDraw
 from PIL import ImageFont
 
 from matplotlib import pyplot as plt
+import matplotlib as mpl
 
 import time
 import board
@@ -36,23 +37,21 @@ x = np.linspace(-1, 1, 50)
 print(x)
 y = 2*x + 1
 
-plt.plot(x, y)
-#plt.show()
-
-plt.savefig('chart.png', bbox_inches='tight')
-
-# Load the image
-image = Image.open('chart.png')
-
-# Resize the image
-image = image.resize((WIDTH, HEIGHT))
-
-# Draw the image on the display hardware.
-print('Drawing image')
-
-disp.display(image)
-
 while True:
     print("\nTemperature: %0.1f C" % sensor.temperature)
     print("Humidity: %0.1f %%" % sensor.relative_humidity)
+
+    mpl.style.use('dark_background')
+    plt.plot(x, y)
+    plt.savefig('chart.png', bbox_inches='tight')
+
+    # Load the image
+    image = Image.open('chart.png')
+
+    # Resize the image
+    image = image.resize((WIDTH, HEIGHT))
+
+    # Draw the image on the display.
+    disp.display(image)
+
     time.sleep(10)
