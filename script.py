@@ -24,15 +24,16 @@ sensor = adafruit_sht31d.SHT31D(i2c)
 # Create ST7735 LCD display class.
 disp = ST7735.ST7735(
     port=0,
-    cs=ST7735.BG_SPI_CS_FRONT,  # BG_SPI_CSB_BACK or BG_SPI_CS_FRONT
+    cs=ST7735.BG_SPI_CS_FRONT,
     dc=9,
-    backlight=19,               # 18 for back BG slot, 19 for front BG slot.
+    backlight=19,
     rotation=90,
     spi_speed_hz=4000000
 )
 
 # Initialize display.
 disp.begin()
+disp.set_backlight(GPIO.HIGH)
 
 WIDTH = disp.width
 HEIGHT = disp.height
@@ -44,7 +45,7 @@ def draw_graph(x, y, disp):
     
     mpl.style.use('dark_background')
     mpl.rc('font', **font)
-    plt.plot(x, y)
+    plt.plot(x, y, color = 'red')
     plt.savefig('chart.png', bbox_inches='tight')
 
     # Load the image
