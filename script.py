@@ -6,6 +6,7 @@ from matplotlib import pyplot as plt
 import matplotlib as mpl
 
 import time
+from datetime import datetime
 import board
 import numpy as np
 
@@ -32,14 +33,16 @@ disp.begin()
 WIDTH = disp.width
 HEIGHT = disp.height
 
-# Plot test
-x = np.linspace(-1, 1, 50)
-print(x)
-y = 2*x + 1
+x = []
+y = []
 
 while True:
-    print("\nTemperature: %0.1f C" % sensor.temperature)
-    print("Humidity: %0.1f %%" % sensor.relative_humidity)
+    now = datetime.now()
+    x.append(now.strftime("%H:%M"))
+    y.append(sensor.temperature)
+
+    # print("\nTemperature: %0.1f C" % sensor.temperature)
+    # print("Humidity: %0.1f %%" % sensor.relative_humidity)
 
     mpl.style.use('dark_background')
     plt.plot(x, y)
