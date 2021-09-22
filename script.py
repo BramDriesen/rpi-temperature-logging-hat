@@ -45,13 +45,14 @@ def draw_graph(x, y, disp):
     mpl.style.use('dark_background')
     mpl.rc('font', **font)
     plt.tick_params(
-        axis='x',
+        axis='both',
         which='both',
+        left=False,
         bottom=False,
         top=False,
         labelbottom=False)    
-    plt.plot(x, y, color = 'red')
-    plt.savefig('chart.png', bbox_inches='tight', pad_inches = 0.0)
+    plt.plot(x, y, color = 'red', marker = 'o')
+    plt.savefig('chart.png', bbox_inches = 'tight', pad_inches = 0.0)
 
     # Load the image
     image = Image.open('chart.png')
