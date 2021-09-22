@@ -11,6 +11,7 @@ import board
 import numpy as np
 import RPi.GPIO as GPIO
 import csv
+import os
 import adafruit_sht31d
 import ST7735
 
@@ -77,6 +78,10 @@ def reset_graph(button):
     x.clear()
     y.clear()
     plt.clf()
+
+    if os.path.exists('data.csv'):
+        os.remove('data.csv')
+
     draw_graph(x, y, disp)
 
 def toggle_screen(button):
@@ -113,6 +118,7 @@ while True:
     draw_graph(x, y, disp)
 
     with open(r'data.csv', 'a', newline='') as csvfile:
-        csvfile.write([time, temperature, humidity])
+        writer = csv.writer(csvfile)
+        writer.writerow([time, temperature, humidity])
 
     time.sleep(10)
