@@ -25,6 +25,12 @@ LCD SPI Library
 curl https://get.pimoroni.com/st7735 | bash
 ```
 
+Matplotlib
+
+```bash
+sudo pip3 install matplotlib
+```
+
 ## Raspi config
 
 ```bash
