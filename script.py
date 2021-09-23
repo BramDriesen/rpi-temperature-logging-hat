@@ -10,6 +10,7 @@ import matplotlib as mpl
 import board
 import numpy as np
 import RPi.GPIO as GPIO
+import config as cfg
 import csv
 import os
 import adafruit_sht31d
@@ -121,4 +122,5 @@ while True:
         writer = csv.writer(csvfile)
         writer.writerow([current_time, temperature, humidity])
 
-    time.sleep(10)
+    interval = 10 if not cfg.LOG_FREQUENCY else cfg.LOG_FREQUENCY
+    time.sleep(interval)

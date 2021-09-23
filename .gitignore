@@ -131,3 +131,4 @@ dmypy.json
 # Logger stuff.
 chart.png
 data.csv
+config.py
